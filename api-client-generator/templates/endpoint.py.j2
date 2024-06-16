@@ -1,0 +1,40 @@
+# api_client_generator/templates/endpoint.py.j2
+import requests
+from tenacity import retry, stop_after_attempt, wait_exponential
+import logging
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+class {{ info.title | replace(' ', '') }}Client:
+    def __init__(self, base_url, auth_token=None, timeout=30, retries=3, headers=None):
+        self.base_url = base_url
+        self.auth_token = auth_token
+        self.timeout = timeout
+        self.retries = retries
+        self.headers = headers or {}
+        self.session = requests.Session()
+        if self.auth_token:
+            self.session.headers.update({'Authorization': f'Bearer {self.auth_token}'})
+        self.session.headers.update(self.headers)
+
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(multiplier=1, min=4, max=10))
+    def request(self, method, url, **kwargs):
+        logger.info(f"Making {method.upper()} request to {url}")
+        try:
+            response = self.session.request(method, url, **kwargs)
+            response.raise_for_status()
+            logger.debug(f"Response: {response.json()}")
+            return response.json()
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Request failed: {e}")
+            raise APIClientError(f"Request failed: {e}")
+
+    {% for path, methods in endpoints.items() %}
+    {% for method, details in methods.items() %}
+    def {{ method }}_{{ path | replace('/', '_') | replace('{', '') | replace('}', '') }}(self, **kwargs):
+        url = f"{self.base_url}{{ path | replace('{', '{{').replace('}', '}}') }}"
+        response = self.request('{{ method }}', url, params=kwargs)
+        return response
+    {% endfor %}
+    {% endfor %}

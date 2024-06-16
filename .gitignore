@@ -1,0 +1,10 @@
+*.pyc
+__pycache__/
+.env
+.vscode/
+.idea/
+build/
+dist/
+*.egg-info/
+generated_client/
+tests/generated/

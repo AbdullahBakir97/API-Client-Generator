@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: Swagger Petstore
+  version: 1.0.0
+paths:
+  /pet/findByStatus:
+    get:
+      summary: Finds Pets by status
+      parameters:
+        - name: status
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Pet'
+components:
+  schemas:
+    Pet:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        status:
+          type: string

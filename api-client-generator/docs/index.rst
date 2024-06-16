@@ -1,0 +1,43 @@
+========================
+API Client Generator Documentation
+========================
+
+Welcome to the documentation for API Client Generator.
+
+Author: Your Name
+:Version: 1.0.0
+:Date: June 2024
+
+.. toctree::
+   :maxdepth: 2
+
+   installation
+   usage
+   
+
+Introduction
+============
+
+This documentation provides information about the API Client Generator tool, which automatically generates client libraries for RESTful APIs based on OpenAPI/Swagger specifications.
+
+Installation
+============
+
+To install the API Client Generator, use pip:
+
+.. code-block:: bash
+
+   pip install api-client-generator
+
+Usage
+=====
+
+Once installed, you can generate a client using the command line tool:
+
+.. code-block:: bash
+
+   generate-client path/to/openapi.yaml
+
+See the :ref:`installation guide <installation>` for detailed installation instructions.
+
+
