@@ -37,39 +37,6 @@ print(response)
 
 
 
-## Project Structure
-
-api-client-generator/
-├── api_client_generator/
-│   ├── __init__.py
-│   ├── generator.py
-│   ├── templates/
-│   │   ├── client.py.j2
-│   │   ├── endpoint.py.j2
-│   ├── utils.py
-├── tests/
-│   ├── __init__.py
-│   ├── test_generator.py
-│   ├── petstore.yaml
-│   ├── generated/
-│   │   ├── client.py
-├── examples/
-│   ├── example_usage.py
-├── docs/
-│   ├── conf.py
-│   ├── index.md
-│   ├── tutorials/
-│   │   ├── getting_started.md
-├── README.md
-├── setup.py
-├── requirements.txt
-├── .gitignore
-├── .github/
-│   ├── workflows/
-│   │   ├── ci.yml
-└── CHANGELOG.md
-
-
 ## Contributing
 We welcome contributions! Please see our Contribution Guidelines for more information.
 
